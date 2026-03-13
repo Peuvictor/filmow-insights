@@ -1,0 +1,25 @@
+<div class="min-h-screen bg-gray-900 text-white p-8">
+  <h1 class="text-4xl font-bold mb-8 text-indigo-400">Filmow Insights 🎬</h1>
+
+  <div class="mb-12 bg-gray-800 p-6 rounded-lg shadow-lg">
+    <%= form_with model: @movie, class: "flex gap-4" do |f| %>
+      <%= f.text_field :filmow_url, placeholder: "Cole a URL do Filmow aqui...",
+          class: "flex-1 bg-gray-700 border-none rounded p-3 text-white focus:ring-2 focus:ring-indigo-500" %>
+      <%= f.submit "Importar Filme",
+          class: "bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded font-bold transition" %>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <% @movies.each do |movie| %>
+      <div class="bg-gray-800 p-5 rounded-xl border border-gray-700 hover:border-indigo-500 transition">
+        <h2 class="text-xl font-bold"><%= movie.title %></h2>
+        <p class="text-gray-400">Diretor: <span class="text-gray-200"><%= movie.director %></span></p>
+        <div class="flex justify-between mt-4 items-center">
+          <span class="bg-gray-700 px-3 py-1 rounded text-sm"><%= movie.year %></span>
+          <span class="text-yellow-400 font-bold">⭐ <%= movie.rating %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
