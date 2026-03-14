@@ -18,13 +18,13 @@ Este projeto foi desenvolvido como parte do meu portfólio de Desenvolvedor Ruby
 * **Web Scraping:** Nokogiri & Open-URI
 * **Estilização:** Tailwind CSS
 
-## 📋 Funcionalidades
+## 📋 Funcionalidades## 📋 Funcionalidades
 - [x] **Importação Inteligente:** Scraper que extrai Título, Diretor, Ano e Nota.
-- [x] **Tratamento de Dados:** Limpeza de strings e normalização de anos/notas.
-- [x] **Prevenção de Duplicidade:** O sistema identifica se um filme já foi importado pela URL, evitando redundância no banco.
-- [x] **Dashboard Dark Mode:** Visualização em cards com feedback visual de notas e datas.
-- [ ] **Correção de Encoding:** Ajuste para caracteres especiais em títulos brasileiros (Próxima Sprint).
-- [ ] **Feedback de Carregamento:** Adição de Spinner para o processo de importação (Próxima Sprint).
+- [x] **CRUD Completo:** Listagem e exclusão de filmes salvos.
+- [x] **Feedback de Carregamento:** Botão de estado dinâmico ("Buscando Filme...") via Turbo.
+- [x] **Sistema de Notificações:** Flash messages animadas para sucesso e erro.
+- [x] **Prevenção de Duplicidade:** Evita duplicar filmes pela URL.
+
 
 ## 🧠 Desafios Técnicos Superados
 
@@ -33,6 +33,11 @@ Sites como o Filmow alteram suas classes frequentemente. Durante o desenvolvimen
 
 ### 2. Arquitetura de Serviços
 Para garantir a manutenibilidade, implementei o `FilmowScraperService`. Isso permite que a lógica de extração seja testada isoladamente no console do Rails ou reutilizada em outras partes do sistema sem duplicar código.
+
+## ⚡ Diferenciais de Implementação
+* **Hotwire/Turbo:** Utilizado para fornecer feedback instantâneo no formulário sem a necessidade de escrever JavaScript customizado complexo.
+* **UX First:** Implementação de diálogos de confirmação nativos e notificações que desaparecem automaticamente para não poluir a interface.
+* **Service Objects:** Toda a lógica de extração de dados está encapsulada, seguindo o princípio de responsabilidade única (SRP).
 
 ## 🔧 Como Executar
 
