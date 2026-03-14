@@ -38,7 +38,6 @@ Uso de atributos `data-turbo` para desabilitar botões e fornecer feedback visua
    ```bash
    git clone [https://github.com/Peuvictor/filmow-insights.git](https://github.com/Peuvictor/filmow-insights.git)
    cd filmow-insights
-   cd filmow-insights
    bundle install
    rails db:create
    rails db:migrate
