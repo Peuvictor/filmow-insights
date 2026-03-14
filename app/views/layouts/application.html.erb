@@ -13,7 +13,21 @@
 
   <body>
     <main class="container mx-auto mt-28 px-5 flex">
-      <%= yield %>
+    <div class="fixed top-5 right-5 z-50 flex flex-col gap-3">
+      <% flash.each do |type, message| %>
+         <% bg_color = type == "notice" ? "bg-green-600" : "bg-red-600" %>
+
+          <div class="<%= bg_color %> text-white px-6 py-4 rounded-lg shadow-2xl border border-white/20 animate-bounce-in flex items-center gap-3">
+           <% if type == "notice" %>
+             <span>✅</span>
+           <% else %>
+             <span>⚠️</span>
+           <% end %>
+           <p class="font-medium"><%= message %></p>
+        </div>
+      <% end %>
+    </div>
+     <%= yield %>
     </main>
   </body>
 </html>

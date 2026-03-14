@@ -20,4 +20,9 @@ class MoviesController < ApplicationController
       redirect_to root_path, alert: "Não conseguimos importar esse filme."
     end
   end
+  def destroy
+  @movie = Movie.find(params[:id])
+  @movie.destroy
+  redirect_to root_path, notice: "Filme removido com sucesso!", status: :see_other
+end
 end
