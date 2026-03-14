@@ -1,49 +1,43 @@
 # 🎬 Filmow Insights
 
-O **Filmow Insights** é uma ferramenta de automação e análise de dados cinematográficos. Ele permite que o usuário importe dados detalhados de filmes diretamente da rede social Filmow apenas colando a URL. A aplicação realiza o web scraping, processa as informações e as organiza em um dashboard moderno.
+O **Filmow Insights** é uma ferramenta de automação e análise de dados cinematográficos. Ele permite importar dados detalhados de filmes da rede social Filmow via URL, organizando-os em um dashboard moderno e funcional.
 
 ![Preview do Projeto](public/filmow_insights_preview.png)
 
 ## 🚀 Motivação e Objetivos
-Este projeto foi desenvolvido como parte do meu portfólio de Desenvolvedor Ruby on Rails, com foco em resolver problemas reais de extração de dados e organização de interface.
-
-* **Engenharia de Dados:** Captura de dados não estruturados (HTML) e conversão em dados relacionais.
-* **Clean Code:** Uso de *Service Objects* para isolar a lógica de scraping, mantendo os Controllers limpos.
-* **User Experience:** Interface responsiva e minimalista utilizando Tailwind CSS em Dark Mode.
+Desenvolvido como um projeto de portfólio "Real World", focado em resolver desafios de extração de dados e experiência do usuário (UX).
+* **Engenharia de Dados:** Captura de HTML não estruturado e conversão em registros relacionais.
+* **Modern Rails (Hotwire/Turbo):** Interface dinâmica com feedback instantâneo sem necessidade de SPAs complexas.
+* **Clean Code:** Lógica de scraping encapsulada em *Service Objects* (SRP).
 
 ## 🛠️ Tecnologias
-* **Framework:** Ruby on Rails 7
-* **Linguagem:** Ruby 3.1.2
+* **Framework:** Ruby on Rails 7 (Hotwire/Turbo)
 * **Banco de Dados:** PostgreSQL
 * **Web Scraping:** Nokogiri & Open-URI
-* **Estilização:** Tailwind CSS
+* **Estilização:** Tailwind CSS (Dark Mode)
 
-## 📋 Funcionalidades## 📋 Funcionalidades
-- [x] **Importação Inteligente:** Scraper que extrai Título, Diretor, Ano e Nota.
-- [x] **CRUD Completo:** Listagem e exclusão de filmes salvos.
-- [x] **Feedback de Carregamento:** Botão de estado dinâmico ("Buscando Filme...") via Turbo.
-- [x] **Sistema de Notificações:** Flash messages animadas para sucesso e erro.
-- [x] **Prevenção de Duplicidade:** Evita duplicar filmes pela URL.
-
+## 📋 Funcionalidades Concluídas
+- [x] **Importação via URL:** Scraper que extrai Título, Diretor, Ano e Nota.
+- [x] **CRUD Completo:** Listagem e exclusão de filmes com persistência no Postgres.
+- [x] **Tratamento de Encoding:** Suporte total a caracteres especiais (UTF-8).
+- [x] **UX & Feedback:** Botão dinâmico ("Buscando...") e confirmações de exclusão.
+- [x] **Sistema de Notificações:** Flash messages animadas para sucesso/erro.
+- [x] **Prevenção de Duplicidade:** O sistema evita importar o mesmo filme múltiplas vezes.
 
 ## 🧠 Desafios Técnicos Superados
 
-### 1. Seletores CSS Voláteis
-Sites como o Filmow alteram suas classes frequentemente. Durante o desenvolvimento, mapeei a transição de seletores como `.average` para `.rating-badge__value`, garantindo a resiliência do scraper através de seletores mais específicos e tratamento de exceções.
+### 1. Robustez no Web Scraping
+Implementação de tratamento de encoding UTF-8 no `Nokogiri` para garantir a integridade de títulos brasileiros e uso de seletores CSS resilientes a mudanças no site de origem.
 
-### 2. Arquitetura de Serviços
-Para garantir a manutenibilidade, implementei o `FilmowScraperService`. Isso permite que a lógica de extração seja testada isoladamente no console do Rails ou reutilizada em outras partes do sistema sem duplicar código.
-
-## ⚡ Diferenciais de Implementação
-* **Hotwire/Turbo:** Utilizado para fornecer feedback instantâneo no formulário sem a necessidade de escrever JavaScript customizado complexo.
-* **UX First:** Implementação de diálogos de confirmação nativos e notificações que desaparecem automaticamente para não poluir a interface.
-* **Service Objects:** Toda a lógica de extração de dados está encapsulada, seguindo o princípio de responsabilidade única (SRP).
+### 2. Feedback Assíncrono com Turbo
+Uso de atributos `data-turbo` para desabilitar botões e fornecer feedback visual imediato ao usuário durante processos de I/O bloqueantes (scraping), melhorando a percepção de performance.
 
 ## 🔧 Como Executar
 
 1. **Clone o projeto:**
    ```bash
    git clone [https://github.com/Peuvictor/filmow-insights.git](https://github.com/Peuvictor/filmow-insights.git)
+   cd filmow-insights
    cd filmow-insights
    bundle install
    rails db:create
