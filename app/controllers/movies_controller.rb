@@ -1,28 +1,38 @@
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all.order(created_at: :desc)
-    @movie = Movie.new # Para o formulário de importação
+    @movie = Movie.new
   end
 
   def create
     url = params[:movie][:filmow_url]
     dados = FilmowScraperService.call(url)
 
+    @movie = Movie.find_or_initialize_by(filmow_url: url)
+
     if dados
-      @movie = Movie.find_or_create_by(filmow_url: url) do |m|
-        m.title = dados[:title]
-        m.director = dados[:director]
-        m.year = dados[:year]
-        m.rating = dados[:rating]
-      end
-      redirect_to root_path, notice: "Filme importado com sucesso!"
+      @movie.assign_attributes(
+        title: dados[:title],
+        director: dados[:director],
+        year: dados[:year],
+        rating: dados[:rating]
+      )
+      notice_msg = "Filme importado com sucesso!"
     else
-      redirect_to root_path, alert: "Não conseguimos importar esse filme."
+      @movie.title ||= "Importado via link (Dados indisponíveis)"
+      notice_msg = "Link salvo! O Filmow bloqueou a leitura automática, mas você pode editar os dados manualmente."
+    end
+
+    if @movie.save
+      redirect_to root_path, notice: notice_msg
+    else
+      redirect_to root_path, alert: "Erro ao salvar o filme."
     end
   end
+
   def destroy
-  @movie = Movie.find(params[:id])
-  @movie.destroy
-  redirect_to root_path, notice: "Filme removido com sucesso!", status: :see_other
-end
+    @movie = Movie.find(params[:id])
+    @movie.destroy
+    redirect_to root_path, notice: "Filme removido com sucesso!", status: :see_other
+  end
 end
