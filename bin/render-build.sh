@@ -3,7 +3,6 @@
 set -o errexit
 
 # Atualiza o RubyGems para evitar erro de incompatibilidade com a Nokogiri
-gem update --system
 
 bundle install
 bundle exec rails assets:precompile
