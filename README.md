@@ -1,47 +1,63 @@
-# 🎬 Filmow Insights
+🎬 Filmow Insights
+O Filmow Insights é uma ferramenta de automação e gerenciamento de dados cinematográficos. Ele permite importar dados detalhados de filmes diretamente do Filmow via URL, organizando-os em um dashboard moderno, responsivo e resiliente.
 
-O **Filmow Insights** é uma ferramenta de automação e análise de dados cinematográficos. Ele permite importar dados detalhados de filmes da rede social Filmow via URL, organizando-os em um dashboard moderno e funcional.
+🚀 Motivação e Objetivos
+Este projeto foi desenvolvido para aplicar conceitos avançados de Ruby on Rails em um cenário real, enfrentando desafios de infraestrutura, web scraping e experiência do usuário (UX).
 
-![Preview do Projeto](public/filmow_insights_preview.png)
+🛠️ Stack Tecnológica
+Linguagem: Ruby 3.3.0 (Versão estável mais recente)
 
-## 🚀 Motivação e Objetivos
-Desenvolvido como um projeto de portfólio "Real World", focado em resolver desafios de extração de dados e experiência do usuário (UX).
-* **Engenharia de Dados:** Captura de HTML não estruturado e conversão em registros relacionais.
-* **Modern Rails (Hotwire/Turbo):** Interface dinâmica com feedback instantâneo sem necessidade de SPAs complexas.
-* **Clean Code:** Lógica de scraping encapsulada em *Service Objects* (SRP).
+Framework: Ruby on Rails 7.1 (Hotwire/Turbo)
 
-## 🛠️ Tecnologias
-* **Framework:** Ruby on Rails 7 (Hotwire/Turbo)
-* **Banco de Dados:** PostgreSQL
-* **Web Scraping:** Nokogiri & Open-URI
-* **Estilização:** Tailwind CSS (Dark Mode)
+Banco de Dados: PostgreSQL
 
-## 📋 Funcionalidades Concluídas
-- [x] **Importação via URL:** Scraper que extrai Título, Diretor, Ano e Nota.
-- [x] **CRUD Completo:** Listagem e exclusão de filmes com persistência no Postgres.
-- [x] **Tratamento de Encoding:** Suporte total a caracteres especiais (UTF-8).
-- [x] **UX & Feedback:** Botão dinâmico ("Buscando...") e confirmações de exclusão.
-- [x] **Sistema de Notificações:** Flash messages animadas para sucesso/erro.
-- [x] **Prevenção de Duplicidade:** O sistema evita importar o mesmo filme múltiplas vezes.
+Web Scraping: Nokogiri & Open-URI
 
-## 🧠 Desafios Técnicos Superados
+Estilização: Tailwind CSS (Dark Mode nativo)
 
-### 1. Robustez no Web Scraping
-Implementação de tratamento de encoding UTF-8 no `Nokogiri` para garantir a integridade de títulos brasileiros e uso de seletores CSS resilientes a mudanças no site de origem.
+Deploy: Render
 
-### 2. Feedback Assíncrono com Turbo
-Uso de atributos `data-turbo` para desabilitar botões e fornecer feedback visual imediato ao usuário durante processos de I/O bloqueantes (scraping), melhorando a percepção de performance.
+📋 Funcionalidades
+[x] Importação Inteligente: Scraper que extrai Título, Diretor, Ano e Nota.
 
-## 🔧 Como Executar
+[x] CRUD Completo: Criar, listar, editar e excluir filmes.
 
-1. **Clone o projeto:**
-   ```bash
-   git clone [https://github.com/Peuvictor/filmow-insights.git](https://github.com/Peuvictor/filmow-insights.git)
-   cd filmow-insights
-   bundle install
-   rails db:create
-   rails db:migrate
-   rails s
+[x] Resiliência em Produção (Fallback): Sistema que detecta bloqueios de IP (Erro 403) e permite a entrada manual de dados.
 
+[x] UX Dinâmica: Uso de Hotwire/Turbo para feedbacks instantâneos sem recarregar a página.
 
-## Desenvolvido por Pedro Victor Guimarães
+[x] Tratamento de Encoding: Suporte total a caracteres especiais e acentuação (UTF-8).
+
+[x] Prevenção de Duplicidade: Evita registros repetidos utilizando a URL como chave única.
+
+🧠 Desafios Técnicos e Soluções
+1. Resiliência a Bloqueios (Evasão de 403 Forbidden)
+Durante o deploy em produção no Render, identifiquei que o servidor de origem bloqueia requisições vindas de datacenters.
+
+Solução: Implementei cabeçalhos de requisição (User-Agent, Referer) para simular um navegador real e, como contingência, desenvolvi um fluxo de fallback. Caso o scraping falhe, o sistema salva o link e direciona o usuário para a edição manual, garantindo que a aplicação nunca fique inoperante.
+
+2. Sincronização de Ambientes
+Atualização de todo o ambiente de desenvolvimento local (WSL) para o Ruby 3.3.0 via rbenv para garantir paridade total com o ambiente de produção do Render, eliminando o erro de "funciona na minha máquina".
+
+3. Service Objects (SRP)
+A lógica de extração de dados foi encapsulada no FilmowScraperService, mantendo os Controllers enxutos e seguindo o princípio de responsabilidade única.
+
+🔧 Como Executar Localmente
+Clone o repositório:
+
+Bash
+git clone https://github.com/Peuvictor/filmow-insights.git
+cd filmow-insights
+Instale as dependências:
+
+Bash
+bundle install
+Configure o banco de dados:
+
+Bash
+rails db:create db:migrate
+Inicie o servidor de desenvolvimento:
+
+Bash
+bin/dev
+Desenvolvido com ☕ e Ruby por Pedro Victor Guimarães
