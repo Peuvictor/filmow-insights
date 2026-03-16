@@ -35,4 +35,22 @@ class MoviesController < ApplicationController
     @movie.destroy
     redirect_to root_path, notice: "Filme removido com sucesso!", status: :see_other
   end
+  def edit
+    @movie = Movie.find(params[:id])
+  end
+
+  def update
+    @movie = Movie.find(params[:id])
+    if @movie.update(movie_params)
+      redirect_to root_path, notice: "Filme atualizado com sucesso!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title, :director, :year, :rating, :filmow_url)
+  end
 end

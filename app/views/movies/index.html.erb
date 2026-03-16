@@ -25,12 +25,18 @@
           </div>
         </div>
 
-        <div class="mt-6 pt-4 border-t border-gray-700 flex justify-end">
+        <%# ÁREA DOS BOTÕES ATUALIZADA %>
+        <div class="mt-6 pt-4 border-t border-gray-700 flex justify-end gap-4 items-center">
+          <%= link_to edit_movie_path(movie),
+              class: "text-xs text-indigo-400 hover:text-indigo-300 transition uppercase tracking-wider font-semibold" do %>
+            Editar
+          <% end %>
+
           <%= button_to movie_path(movie),
-            method: :delete,
-            form: { data: { turbo_confirm: "Deseja mesmo remover '#{movie.title}'?" } },
-             class: "text-xs text-red-400 hover:text-red-300 transition uppercase tracking-wider font-semibold" do %>
-           Remover
+              method: :delete,
+              form: { data: { turbo_confirm: "Deseja mesmo remover '#{movie.title}'?" } },
+              class: "text-xs text-red-400 hover:text-red-300 transition uppercase tracking-wider font-semibold" do %>
+            Remover
           <% end %>
         </div>
       </div>

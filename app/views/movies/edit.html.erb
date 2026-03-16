@@ -1,0 +1,31 @@
+<div class="max-w-2xl mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+  <h1 class="text-2xl font-bold mb-6 text-indigo-400">Editar Filme</h1>
+
+  <%= form_with(model: @movie, class: "space-y-4") do |f| %>
+    <div>
+      <%= f.label :title, "Título", class: "block text-sm font-medium text-gray-300" %>
+      <%= f.text_field :title, class: "mt-1 block w-full bg-gray-700 border-none rounded-md shadow-sm text-white focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <%= f.label :director, "Diretor", class: "block text-sm font-medium text-gray-300" %>
+        <%= f.text_field :director, class: "mt-1 block w-full bg-gray-700 border-none rounded-md shadow-sm text-white focus:ring-2 focus:ring-indigo-500" %>
+      </div>
+      <div>
+        <%= f.label :year, "Ano", class: "block text-sm font-medium text-gray-300" %>
+        <%= f.number_field :year, class: "mt-1 block w-full bg-gray-700 border-none rounded-md shadow-sm text-white focus:ring-2 focus:ring-indigo-500" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :rating, "Nota", class: "block text-sm font-medium text-gray-300" %>
+      <%= f.text_field :rating, class: "mt-1 block w-full bg-gray-700 border-none rounded-md shadow-sm text-white focus:ring-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="flex justify-between items-center pt-4 border-t border-gray-700">
+      <%= link_to "Cancelar", root_path, class: "text-gray-400 hover:text-white transition" %>
+      <%= f.submit "Salvar Alterações", class: "bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 cursor-pointer font-bold transition" %>
+    </div>
+  <% end %> <%# AGORA COM O % CERTO %>
+</div>
